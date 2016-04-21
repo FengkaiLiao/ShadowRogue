@@ -10,6 +10,7 @@ import net.slashie.libjcsi.CharKey;
 import net.slashie.libjcsi.ConsoleSystemInterface;
 import net.slashie.libjcsi.wswing.WSwingConsoleInterface;
 import java.util.Properties;
+import java.util.Random;
 
 /**
  *
@@ -22,7 +23,7 @@ public class ShadowRogue {
      */
     public static void main(String[] args) {
         Properties text = new Properties();
-	text.setProperty("fontSize","12");
+	text.setProperty("fontSize","15");
 	text.setProperty("font", "Courier");
 	ConsoleSystemInterface csi = null;
 	try{
@@ -39,6 +40,7 @@ public class ShadowRogue {
 	while(!stop){
             csi.cls();
             csi.print(x,y, '@', CSIColor.WHITE);
+            createEnemies(csi, 9);
             csi.refresh();
             CharKey dir = csi.inkey();
             if(dir.isUpArrow()&& (y-1 >= 0)){
@@ -58,5 +60,9 @@ public class ShadowRogue {
             }
         }  
         System.exit(0);
+    }
+    public static void createEnemies(ConsoleSystemInterface csi, int number){
+            for(int i = 0; i < number; i++)
+                csi.print(i, i + 2, 'O', CSIColor.BLUE);
     }
 }
